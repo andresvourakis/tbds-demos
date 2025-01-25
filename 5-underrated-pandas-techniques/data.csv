@@ -1,0 +1,11 @@
+order_id,customer_id,order_date,region,category,quantity,price_per_unit,tags,gender,total_sales
+1,100,2025-01-10,North,Clothing,2,67,"['premium', 'gift']",Non-binary,10000
+2,104,2025-01-12,West,Clothing,2,139,"['premium', 'gift']",Female,5
+3,109,2025-01-14,North,Electronics,5,170,"['premium', 'gift']",Non-binary,15000
+4,101,2025-01-16,East,Home Decor,5,158,['discounted'],Male,790
+5,102,2025-01-18,West,Home Decor,2,112,"['premium', 'gift']",Female,224
+6,105,2025-01-20,West,Home Decor,1,90,"['new arrival', 'premium']",Male,90
+7,104,2025-01-22,West,Clothing,1,44,['discounted'],Non-binary,44
+8,101,2025-01-24,East,Home Decor,3,110,['discounted'],Male,330
+9,105,2025-01-26,North,Clothing,2,148,"['new arrival', 'premium']",Female,296
+10,106,2025-01-28,West,Electronics,4,151,"['premium', 'gift']",Male,604
