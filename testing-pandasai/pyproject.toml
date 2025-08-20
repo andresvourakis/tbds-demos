@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "test-pandas-ai"
+version = "0.1.0"
+description = "Testing PandasAI functionality"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [{include = "test_pandas_ai"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+pandasai = ">=3.0.0b2"
+pandasai-openai = "^0.1.6"
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
