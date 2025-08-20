@@ -156,3 +156,1972 @@ LIMIT 5
 top_countries_df = execute_sql_query(sql_query)
 result = {'type': 'dataframe', 'value': top_countries_df}
 2025-08-20 08:07:33 [INFO] Response generated successfully.
+2025-08-20 08:43:02 [INFO] Question: How many customers are in each segment?
+2025-08-20 08:43:02 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:43:02 [INFO] Prompt ID: 6feaf883-2f77-4743-a7c0-44c6756e8f55
+2025-08-20 08:43:02 [INFO] Generating new code...
+2025-08-20 08:43:02 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many customers are in each segment?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:43:05 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:43:05 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to count customers in each segment
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+
+# Execute the query and get the result dataframe
+df_segment_counts = execute_sql_query(sql_query)
+
+# Declare result var:
+result = { "type": "dataframe", "value": df_segment_counts }
+2025-08-20 08:43:05 [INFO] Validating code requirements...
+2025-08-20 08:43:05 [INFO] Code validation successful.
+2025-08-20 08:43:05 [INFO] Cleaning the generated code...
+2025-08-20 08:43:05 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+df_segment_counts = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df_segment_counts}
+2025-08-20 08:43:06 [INFO] Response generated successfully.
+2025-08-20 08:43:06 [INFO] Question: What is the average monetary value for each customer segment?
+2025-08-20 08:43:06 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:43:06 [INFO] Prompt ID: eeb93113-775b-414b-ad38-5ca2df0541b5
+2025-08-20 08:43:06 [INFO] Generating new code...
+2025-08-20 08:43:06 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the average monetary value for each customer segment?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:43:09 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:43:09 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to get average monetary value for each customer segment
+sql_query = """
+SELECT Segment, AVG(Monetary) AS Avg_Monetary
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Avg_Monetary DESC
+"""
+
+# Execute the query and get the result dataframe
+avg_monetary_df = execute_sql_query(sql_query)
+
+# Declare result var:
+result = { "type": "dataframe", "value": avg_monetary_df }
+2025-08-20 08:43:09 [INFO] Validating code requirements...
+2025-08-20 08:43:09 [INFO] Code validation successful.
+2025-08-20 08:43:09 [INFO] Cleaning the generated code...
+2025-08-20 08:43:09 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT Segment, AVG(Monetary) AS Avg_Monetary
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Avg_Monetary DESC
+"""
+avg_monetary_df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': avg_monetary_df}
+2025-08-20 08:43:09 [INFO] Response generated successfully.
+2025-08-20 08:43:09 [INFO] Question: Which segment has the highest average frequency?
+2025-08-20 08:43:09 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:43:09 [INFO] Prompt ID: 84e91c0f-767e-4008-9bce-b9788905a03e
+2025-08-20 08:43:09 [INFO] Generating new code...
+2025-08-20 08:43:09 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Which segment has the highest average frequency?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:43:12 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:43:12 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to find the segment with the highest average frequency
+sql_query = """
+SELECT Segment, AVG(Frequency) AS avg_frequency
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY avg_frequency DESC
+LIMIT 1
+"""
+
+# Execute the query
+df_result = execute_sql_query(sql_query)
+
+# Extract the segment name with the highest average frequency
+highest_avg_freq_segment = df_result.iloc[0]['Segment']
+
+# Declare result var:
+result = { "type": "string", "value": f"The segment with the highest average frequency is '{highest_avg_freq_segment}'." }
+2025-08-20 08:43:12 [INFO] Validating code requirements...
+2025-08-20 08:43:12 [INFO] Code validation successful.
+2025-08-20 08:43:12 [INFO] Cleaning the generated code...
+2025-08-20 08:43:12 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT Segment, AVG(Frequency) AS avg_frequency
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY avg_frequency DESC
+LIMIT 1
+"""
+df_result = execute_sql_query(sql_query)
+highest_avg_freq_segment = df_result.iloc[0]['Segment']
+result = {'type': 'string', 'value': f"The segment with the highest average frequency is '{highest_avg_freq_segment}'."}
+2025-08-20 08:43:12 [INFO] Response generated successfully.
+2025-08-20 08:43:12 [INFO] Question: Show me the top 5 customers by monetary value
+2025-08-20 08:43:12 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:43:12 [INFO] Prompt ID: 6b1d3e1f-e64a-4cd5-9b4a-056874b9b528
+2025-08-20 08:43:12 [INFO] Generating new code...
+2025-08-20 08:43:12 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Show me the top 5 customers by monetary value
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:43:16 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:43:16 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to get top 5 customers by monetary value
+sql_query = """
+SELECT CustomerID, Monetary
+FROM table_rfm_segmented
+ORDER BY Monetary DESC
+LIMIT 5
+"""
+
+# Execute the query
+top_customers = execute_sql_query(sql_query)
+
+# Declare result var:
+result = { "type": "dataframe", "value": top_customers }
+2025-08-20 08:43:16 [INFO] Validating code requirements...
+2025-08-20 08:43:16 [INFO] Code validation successful.
+2025-08-20 08:43:16 [INFO] Cleaning the generated code...
+2025-08-20 08:43:16 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT CustomerID, Monetary
+FROM table_rfm_segmented
+ORDER BY Monetary DESC
+LIMIT 5
+"""
+top_customers = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': top_customers}
+2025-08-20 08:43:16 [INFO] Response generated successfully.
+2025-08-20 08:43:16 [INFO] Question: What percentage of customers are loyal customers?
+2025-08-20 08:43:16 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:43:16 [INFO] Prompt ID: 3884695d-c47f-416f-bcac-b0fd9ba95173
+2025-08-20 08:43:16 [INFO] Generating new code...
+2025-08-20 08:43:16 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What percentage of customers are loyal customers?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:43:22 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:43:22 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to calculate the percentage of loyal customers
+sql_query = """
+SELECT 
+    ROUND(100.0 * SUM(CASE WHEN Segment = 'Loyal Customers' THEN 1 ELSE 0 END) / COUNT(*), 2) AS loyal_customer_percentage
+FROM table_rfm_segmented
+"""
+
+# Execute the query
+df_result = execute_sql_query(sql_query)
+
+# Extract the percentage value
+loyal_percentage = df_result.loc[0, "loyal_customer_percentage"]
+
+# Declare result var:
+result = { "type": "number", "value": loyal_percentage }
+2025-08-20 08:43:22 [INFO] Validating code requirements...
+2025-08-20 08:43:22 [INFO] Code validation successful.
+2025-08-20 08:43:22 [INFO] Cleaning the generated code...
+2025-08-20 08:43:22 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT 
+    ROUND(100.0 * SUM(CASE WHEN Segment = 'Loyal Customers' THEN 1 ELSE 0 END) / COUNT(*), 2) AS loyal_customer_percentage
+FROM table_rfm_segmented
+"""
+df_result = execute_sql_query(sql_query)
+loyal_percentage = df_result.loc[0, 'loyal_customer_percentage']
+result = {'type': 'number', 'value': loyal_percentage}
+2025-08-20 08:43:22 [INFO] Response generated successfully.
+2025-08-20 08:45:17 [INFO] Question: how many different segements are there and which are they?
+2025-08-20 08:45:17 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:45:17 [INFO] Prompt ID: bd37eb67-05de-4b48-843f-876c2fcc37e7
+2025-08-20 08:45:17 [INFO] Generating new code...
+2025-08-20 08:45:17 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ how many different segements are there and which are they?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:45:19 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:45:19 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to find distinct segments and their count
+sql_query = """
+SELECT 
+    COUNT(DISTINCT Segment) AS segment_count,
+    STRING_AGG(DISTINCT Segment, ', ') AS segments
+FROM table_rfm_segmented
+"""
+
+# Execute the query
+df = execute_sql_query(sql_query)
+
+# Extract results
+segment_count = df.loc[0, 'segment_count']
+segments = df.loc[0, 'segments']
+
+result = {
+    "type": "string",
+    "value": f"There are {segment_count} different segments: {segments}."
+}
+2025-08-20 08:45:19 [INFO] Validating code requirements...
+2025-08-20 08:45:19 [INFO] Code validation successful.
+2025-08-20 08:45:19 [INFO] Cleaning the generated code...
+2025-08-20 08:45:19 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT 
+    COUNT(DISTINCT Segment) AS segment_count,
+    STRING_AGG(DISTINCT Segment, ', ') AS segments
+FROM table_rfm_segmented
+"""
+df = execute_sql_query(sql_query)
+segment_count = df.loc[0, 'segment_count']
+segments = df.loc[0, 'segments']
+result = {'type': 'string', 'value': f'There are {segment_count} different segments: {segments}.'}
+2025-08-20 08:45:19 [INFO] Response generated successfully.
+2025-08-20 08:45:49 [INFO] Question: which segment brings the most monetary value?
+2025-08-20 08:45:49 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:45:49 [INFO] Prompt ID: 2cea7dc9-597c-496f-842f-3b5fbcd5fbcd
+2025-08-20 08:45:49 [INFO] Generating new code...
+2025-08-20 08:45:49 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ which segment brings the most monetary value?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:45:53 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:45:53 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to find the segment with the highest total monetary value
+sql_query = """
+SELECT Segment, SUM(Monetary) AS Total_Monetary
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Total_Monetary DESC
+LIMIT 1
+"""
+
+# Execute the query
+df_result = execute_sql_query(sql_query)
+
+# Extract the segment name and total monetary value
+top_segment = df_result.iloc[0]['Segment']
+top_monetary_value = df_result.iloc[0]['Total_Monetary']
+
+result = {
+    "type": "string",
+    "value": f"The segment that brings the most monetary value is '{top_segment}' with a total monetary value of {top_monetary_value:.2f}."
+}
+2025-08-20 08:45:53 [INFO] Validating code requirements...
+2025-08-20 08:45:53 [INFO] Code validation successful.
+2025-08-20 08:45:53 [INFO] Cleaning the generated code...
+2025-08-20 08:45:53 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT Segment, SUM(Monetary) AS Total_Monetary
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Total_Monetary DESC
+LIMIT 1
+"""
+df_result = execute_sql_query(sql_query)
+top_segment = df_result.iloc[0]['Segment']
+top_monetary_value = df_result.iloc[0]['Total_Monetary']
+result = {'type': 'string', 'value': f"The segment that brings the most monetary value is '{top_segment}' with a total monetary value of {top_monetary_value:.2f}."}
+2025-08-20 08:45:53 [INFO] Response generated successfully.
+2025-08-20 08:46:30 [INFO] Question: plot the distribution of customers accross the different segments, using a different color for each segment
+2025-08-20 08:46:30 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:46:30 [INFO] Prompt ID: f26bebf7-d5d0-4f3d-841d-e7871fd101cd
+2025-08-20 08:46:30 [INFO] Generating new code...
+2025-08-20 08:46:30 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ plot the distribution of customers accross the different segments, using a different color for each segment
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:46:33 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:46:33 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Query to get the count of customers per segment
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+
+# Execute the query and get the dataframe
+df_segment_counts = execute_sql_query(sql_query)
+
+# Plotting the distribution
+plt.figure(figsize=(10,6))
+sns.barplot(data=df_segment_counts, x='Segment', y='CustomerCount', palette='tab10')
+plt.title('Distribution of Customers Across Different Segments')
+plt.xlabel('Segment')
+plt.ylabel('Number of Customers')
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Save the plot to a file
+plot_filename = "customer_segment_distribution.png"
+plt.savefig(plot_filename)
+plt.close()
+
+result = { "type": "plot", "value": plot_filename }
+2025-08-20 08:46:33 [INFO] Validating code requirements...
+2025-08-20 08:46:33 [INFO] Code validation successful.
+2025-08-20 08:46:33 [INFO] Cleaning the generated code...
+2025-08-20 08:46:33 [INFO] Executing code: import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+df_segment_counts = execute_sql_query(sql_query)
+plt.figure(figsize=(10, 6))
+sns.barplot(data=df_segment_counts, x='Segment', y='CustomerCount', palette='tab10')
+plt.title('Distribution of Customers Across Different Segments')
+plt.xlabel('Segment')
+plt.ylabel('Number of Customers')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plot_filename = 'exports/charts/temp_chart_27ecca59-026e-4583-a6bf-4c05f0ca3154.png'
+plt.savefig(plot_filename)
+plt.close()
+result = {'type': 'plot', 'value': plot_filename}
+2025-08-20 08:46:45 [INFO] Response generated successfully.
+2025-08-20 08:50:43 [INFO] Question: How many customers are in each segment?
+2025-08-20 08:50:43 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:50:43 [INFO] Prompt ID: 8dd10a78-45ab-4f84-9952-586d14807521
+2025-08-20 08:50:43 [INFO] Generating new code...
+2025-08-20 08:50:43 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many customers are in each segment?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:50:46 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:50:46 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Execute the SQL query to count customers in each segment
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+
+# Run the query and store the result in a DataFrame
+customer_counts_df = execute_sql_query(sql_query)
+
+# Declare result var: 
+result = {
+    "type": "dataframe",
+    "value": customer_counts_df
+}
+2025-08-20 08:50:46 [INFO] Validating code requirements...
+2025-08-20 08:50:46 [INFO] Code validation successful.
+2025-08-20 08:50:46 [INFO] Cleaning the generated code...
+2025-08-20 08:50:46 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+customer_counts_df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': customer_counts_df}
+2025-08-20 08:50:47 [INFO] Response generated successfully.
+2025-08-20 08:50:47 [INFO] Question: What is the average monetary value for each customer segment?
+2025-08-20 08:50:47 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:50:47 [INFO] Prompt ID: 56b392b5-f5cc-4672-a424-6306e9926683
+2025-08-20 08:50:47 [INFO] Generating new code...
+2025-08-20 08:50:47 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the average monetary value for each customer segment?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:50:52 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:50:52 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to calculate the average monetary value for each customer segment
+sql_query = """
+SELECT Segment, AVG(Monetary) AS Average_Monetary
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Average_Monetary DESC
+"""
+
+# Execute the SQL query and store the result in a DataFrame
+average_monetary_df = execute_sql_query(sql_query)
+
+# Declare result var: 
+result = {
+    "type": "dataframe",
+    "value": average_monetary_df
+}
+2025-08-20 08:50:52 [INFO] Validating code requirements...
+2025-08-20 08:50:52 [INFO] Code validation successful.
+2025-08-20 08:50:52 [INFO] Cleaning the generated code...
+2025-08-20 08:50:52 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT Segment, AVG(Monetary) AS Average_Monetary
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Average_Monetary DESC
+"""
+average_monetary_df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': average_monetary_df}
+2025-08-20 08:50:52 [INFO] Response generated successfully.
+2025-08-20 08:50:52 [INFO] Question: Which segment has the highest average frequency?
+2025-08-20 08:50:52 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:50:52 [INFO] Prompt ID: c150f29b-3341-4093-98df-778f4505ce32
+2025-08-20 08:50:52 [INFO] Generating new code...
+2025-08-20 08:50:52 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Which segment has the highest average frequency?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:52:05 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-08-20 08:52:05 [INFO] An error occurred during code generation: Error code: 400 - {'error': {'message': 'something went wrong reading your request', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2025-08-20 08:52:05 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 34, in generate_code
+    code = self._context.config.llm.generate_code(prompt, self._context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/llm/base.py", line 172, in generate_code
+    response = self.call(instruction, context)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai_openai/base.py", line 188, in call
+    self.chat_completion(self.last_prompt, memory)
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai_openai/base.py", line 165, in chat_completion
+    response = self.client.create(**params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/resources/chat/completions/completions.py", line 1147, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'something went wrong reading your request', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+
+2025-08-20 08:52:05 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/agent/base.py", line 165, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/agent/base.py", line 110, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 47, in generate_code
+    raise e
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 34, in generate_code
+    code = self._context.config.llm.generate_code(prompt, self._context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/llm/base.py", line 172, in generate_code
+    response = self.call(instruction, context)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai_openai/base.py", line 188, in call
+    self.chat_completion(self.last_prompt, memory)
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai_openai/base.py", line 165, in chat_completion
+    response = self.client.create(**params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/resources/chat/completions/completions.py", line 1147, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'something went wrong reading your request', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+
+2025-08-20 08:52:05 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+The user asked the following question:
+### QUERY
+ Which segment has the highest average frequency?
+
+You generated the following Python code:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to calculate the average monetary value for each customer segment
+sql_query = """
+SELECT Segment, AVG(Monetary) AS Average_Monetary
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Average_Monetary DESC
+"""
+
+# Execute the SQL query and store the result in a DataFrame
+average_monetary_df = execute_sql_query(sql_query)
+
+# Declare result var: 
+result = {
+    "type": "dataframe",
+    "value": average_monetary_df
+}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/agent/base.py", line 165, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/agent/base.py", line 110, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 47, in generate_code
+    raise e
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 34, in generate_code
+    code = self._context.config.llm.generate_code(prompt, self._context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai/llm/base.py", line 172, in generate_code
+    response = self.call(instruction, context)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai_openai/base.py", line 188, in call
+    self.chat_completion(self.last_prompt, memory)
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/pandasai_openai/base.py", line 165, in chat_completion
+    response = self.client.create(**params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/resources/chat/completions/completions.py", line 1147, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andresvourakis/Library/Caches/pypoetry/virtualenvs/test-pandas-ai-mIT2FrUE-py3.11/lib/python3.11/site-packages/openai/_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'something went wrong reading your request', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-08-20 08:52:10 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:52:10 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to calculate the average frequency for each customer segment
+sql_query = """
+SELECT Segment, AVG(Frequency) AS Average_Frequency
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Average_Frequency DESC
+"""
+
+# Execute the SQL query and store the result in a DataFrame
+average_frequency_df = execute_sql_query(sql_query)
+
+# Get the segment with the highest average frequency
+highest_average_frequency_segment = average_frequency_df.iloc[0]
+
+# Declare result var:
+result = {
+    "type": "dataframe",
+    "value": highest_average_frequency_segment
+}
+2025-08-20 08:52:10 [INFO] Validating code requirements...
+2025-08-20 08:52:10 [INFO] Code validation successful.
+2025-08-20 08:52:10 [INFO] Cleaning the generated code...
+2025-08-20 08:52:10 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT Segment, AVG(Frequency) AS Average_Frequency
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Average_Frequency DESC
+"""
+average_frequency_df = execute_sql_query(sql_query)
+highest_average_frequency_segment = average_frequency_df.iloc[0]
+result = {'type': 'dataframe', 'value': highest_average_frequency_segment}
+2025-08-20 08:52:10 [INFO] Response generated successfully.
+2025-08-20 08:52:10 [INFO] Question: Show me the top 5 customers by monetary value
+2025-08-20 08:52:10 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:52:10 [INFO] Prompt ID: 4ee90625-c73a-44ca-b541-b7ff66146871
+2025-08-20 08:52:10 [INFO] Generating new code...
+2025-08-20 08:52:10 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Show me the top 5 customers by monetary value
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:52:14 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:52:14 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to get the top 5 customers by monetary value
+sql_query = """
+SELECT CustomerID, Monetary
+FROM table_rfm_segmented
+ORDER BY Monetary DESC
+LIMIT 5
+"""
+
+# Execute the SQL query
+top_customers_df = execute_sql_query(sql_query)
+
+# Declare result var: 
+result = {
+    "type": "dataframe",
+    "value": top_customers_df
+}
+2025-08-20 08:52:14 [INFO] Validating code requirements...
+2025-08-20 08:52:14 [INFO] Code validation successful.
+2025-08-20 08:52:14 [INFO] Cleaning the generated code...
+2025-08-20 08:52:14 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT CustomerID, Monetary
+FROM table_rfm_segmented
+ORDER BY Monetary DESC
+LIMIT 5
+"""
+top_customers_df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': top_customers_df}
+2025-08-20 08:52:14 [INFO] Response generated successfully.
+2025-08-20 08:52:14 [INFO] Question: What percentage of customers are loyal customers?
+2025-08-20 08:52:14 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:52:14 [INFO] Prompt ID: 41b8d4aa-b51e-4275-8167-8a5921a91cc6
+2025-08-20 08:52:14 [INFO] Generating new code...
+2025-08-20 08:52:14 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What percentage of customers are loyal customers?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:53:14 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:53:14 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Define the SQL query to calculate the percentage of loyal customers
+sql_query = """
+SELECT 
+    (COUNT(CASE WHEN Segment = 'Loyal Customers' THEN 1 END) * 100.0 / COUNT(*)) AS percentage_loyal_customers
+FROM 
+    table_rfm_segmented
+"""
+
+# Execute the SQL query
+loyalty_data = execute_sql_query(sql_query)
+
+# Extract the percentage of loyal customers from the result
+percentage_loyal_customers = loyalty_data['percentage_loyal_customers'].iloc[0]
+
+# Declare result var
+result = {
+    "type": "number", 
+    "value": percentage_loyal_customers
+}
+2025-08-20 08:53:14 [INFO] Validating code requirements...
+2025-08-20 08:53:14 [INFO] Code validation successful.
+2025-08-20 08:53:14 [INFO] Cleaning the generated code...
+2025-08-20 08:53:14 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT 
+    (COUNT(CASE WHEN Segment = 'Loyal Customers' THEN 1 END) * 100.0 / COUNT(*)) AS percentage_loyal_customers
+FROM 
+    table_rfm_segmented
+"""
+loyalty_data = execute_sql_query(sql_query)
+percentage_loyal_customers = loyalty_data['percentage_loyal_customers'].iloc[0]
+result = {'type': 'number', 'value': percentage_loyal_customers}
+2025-08-20 08:53:14 [INFO] Response generated successfully.
+2025-08-20 08:54:13 [INFO] Question: plot a bar chart displaying the distribution of customers accross the different segments, and label the bars
+2025-08-20 08:54:13 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:54:13 [INFO] Prompt ID: 0274e4d7-2847-4e16-b38a-03b28ff14473
+2025-08-20 08:54:13 [INFO] Generating new code...
+2025-08-20 08:54:13 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ plot a bar chart displaying the distribution of customers accross the different segments, and label the bars
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:54:18 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:54:18 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Execute SQL query to get the count of customers in each segment
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+
+# Get the data from the database
+df_segments = execute_sql_query(sql_query)
+
+# Plot the bar chart
+plt.figure(figsize=(10, 6))
+bars = plt.bar(df_segments['Segment'], df_segments['CustomerCount'], color='skyblue')
+
+# Label the bars
+for bar in bars:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, yval, int(yval), va='bottom')  # va: vertical alignment
+
+plt.title('Distribution of Customers Across Segments')
+plt.xlabel('Segments')
+plt.ylabel('Number of Customers')
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Save the plot to a file
+plt.savefig('customer_distribution_segments.png')
+
+# Declare result var: 
+result = { "type": "plot", "value": "customer_distribution_segments.png" }
+2025-08-20 08:54:18 [INFO] Validating code requirements...
+2025-08-20 08:54:18 [INFO] Code validation successful.
+2025-08-20 08:54:18 [INFO] Cleaning the generated code...
+2025-08-20 08:54:18 [INFO] Executing code: import pandas as pd
+import matplotlib.pyplot as plt
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+df_segments = execute_sql_query(sql_query)
+plt.figure(figsize=(10, 6))
+bars = plt.bar(df_segments['Segment'], df_segments['CustomerCount'], color='skyblue')
+for bar in bars:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width() / 2, yval, int(yval), va='bottom')
+plt.title('Distribution of Customers Across Segments')
+plt.xlabel('Segments')
+plt.ylabel('Number of Customers')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('exports/charts/temp_chart_51614630-4f1a-48f1-9e4d-5a9514315960.png')
+result = {'type': 'plot', 'value': 'exports/charts/temp_chart_51614630-4f1a-48f1-9e4d-5a9514315960.png'}
+2025-08-20 08:54:18 [INFO] Response generated successfully.
+2025-08-20 08:59:26 [INFO] Question: How many customers are in each segment?
+2025-08-20 08:59:26 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:59:26 [INFO] Prompt ID: f60b1460-0a0c-45b7-8fd4-3eeccedec94c
+2025-08-20 08:59:26 [INFO] Generating new code...
+2025-08-20 08:59:26 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many customers are in each segment?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:59:29 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:59:29 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Define the SQL query to count customers in each segment
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+
+# Execute the SQL query and retrieve the results into a DataFrame
+customer_counts = execute_sql_query(sql_query)
+
+# Declare result var: 
+result = {
+    "type": "dataframe",
+    "value": customer_counts
+}
+2025-08-20 08:59:29 [INFO] Validating code requirements...
+2025-08-20 08:59:29 [INFO] Code validation successful.
+2025-08-20 08:59:29 [INFO] Cleaning the generated code...
+2025-08-20 08:59:29 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+customer_counts = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': customer_counts}
+2025-08-20 08:59:29 [INFO] Response generated successfully.
+2025-08-20 08:59:29 [INFO] Question: What is the average monetary value for each customer segment?
+2025-08-20 08:59:29 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:59:29 [INFO] Prompt ID: edec901a-eab9-45cf-96c7-c405c9e0412b
+2025-08-20 08:59:29 [INFO] Generating new code...
+2025-08-20 08:59:29 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the average monetary value for each customer segment?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:59:32 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:59:32 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Define the SQL query to calculate the average monetary value for each customer segment
+sql_query = """
+SELECT Segment, AVG(Monetary) AS Average_Monetary
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Average_Monetary DESC;
+"""
+
+# Execute the SQL query and store the result in a DataFrame
+average_monetary_df = execute_sql_query(sql_query)
+
+# Declare result var: 
+result = {
+    "type": "dataframe",
+    "value": average_monetary_df
+}
+2025-08-20 08:59:32 [INFO] Validating code requirements...
+2025-08-20 08:59:32 [INFO] Code validation successful.
+2025-08-20 08:59:32 [INFO] Cleaning the generated code...
+2025-08-20 08:59:32 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT Segment, AVG(Monetary) AS Average_Monetary
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Average_Monetary DESC;
+"""
+average_monetary_df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': average_monetary_df}
+2025-08-20 08:59:32 [INFO] Response generated successfully.
+2025-08-20 08:59:32 [INFO] Question: Which segment has the highest average frequency?
+2025-08-20 08:59:32 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:59:32 [INFO] Prompt ID: f6738a15-437b-4c60-b6d4-fb67001e5eb5
+2025-08-20 08:59:32 [INFO] Generating new code...
+2025-08-20 08:59:32 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Which segment has the highest average frequency?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:59:37 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:59:37 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# SQL query to calculate the average frequency for each segment and get the segment with the highest average frequency
+sql_query = """
+SELECT Segment, AVG(Frequency) AS Average_Frequency
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Average_Frequency DESC
+LIMIT 1
+"""
+
+# Execute the SQL query and store the result in a DataFrame
+result_df = execute_sql_query(sql_query)
+
+# Extract the segment with the highest average frequency
+highest_average_frequency_segment = result_df.iloc[0]
+
+# Declare result var
+result = {
+    "type": "string",
+    "value": f"The segment with the highest average frequency is '{highest_average_frequency_segment['Segment']}' with an average frequency of {highest_average_frequency_segment['Average_Frequency']}."
+}
+2025-08-20 08:59:37 [INFO] Validating code requirements...
+2025-08-20 08:59:37 [INFO] Code validation successful.
+2025-08-20 08:59:37 [INFO] Cleaning the generated code...
+2025-08-20 08:59:37 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT Segment, AVG(Frequency) AS Average_Frequency
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY Average_Frequency DESC
+LIMIT 1
+"""
+result_df = execute_sql_query(sql_query)
+highest_average_frequency_segment = result_df.iloc[0]
+result = {'type': 'string', 'value': f"The segment with the highest average frequency is '{highest_average_frequency_segment['Segment']}' with an average frequency of {highest_average_frequency_segment['Average_Frequency']}."}
+2025-08-20 08:59:37 [INFO] Response generated successfully.
+2025-08-20 08:59:37 [INFO] Question: Show me the top 5 customers by monetary value
+2025-08-20 08:59:37 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:59:37 [INFO] Prompt ID: 2531ace9-91b9-4a40-b20f-363b53e523a5
+2025-08-20 08:59:37 [INFO] Generating new code...
+2025-08-20 08:59:37 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Show me the top 5 customers by monetary value
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:59:40 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:59:40 [INFO] Code Generated:
+# Import the required dependencies
+import pandas as pd
+
+# Execute SQL query to get the top 5 customers by monetary value
+sql_query = """
+SELECT CustomerID, Monetary 
+FROM table_rfm_segmented 
+ORDER BY Monetary DESC 
+LIMIT 5
+"""
+top_customers_df = execute_sql_query(sql_query)
+
+# Declare result var:
+result = {
+    "type": "dataframe",
+    "value": top_customers_df
+}
+2025-08-20 08:59:40 [INFO] Validating code requirements...
+2025-08-20 08:59:40 [INFO] Code validation successful.
+2025-08-20 08:59:40 [INFO] Cleaning the generated code...
+2025-08-20 08:59:40 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT CustomerID, Monetary 
+FROM table_rfm_segmented 
+ORDER BY Monetary DESC 
+LIMIT 5
+"""
+top_customers_df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': top_customers_df}
+2025-08-20 08:59:40 [INFO] Response generated successfully.
+2025-08-20 08:59:40 [INFO] Question: What percentage of customers are loyal customers?
+2025-08-20 08:59:40 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:59:40 [INFO] Prompt ID: c5584fab-991a-43ac-9d3e-bbdf78c93b90
+2025-08-20 08:59:40 [INFO] Generating new code...
+2025-08-20 08:59:40 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What percentage of customers are loyal customers?
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:59:44 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:59:44 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Execute the SQL query to calculate the percentage of loyal customers
+sql_query = """
+SELECT 
+    (COUNT(CASE WHEN Segment = 'Loyal Customers' THEN 1 END) * 100.0 / COUNT(*)) AS loyal_percentage
+FROM 
+    table_rfm_segmented
+"""
+
+# Get the result as a DataFrame
+loyalty_df = execute_sql_query(sql_query)
+
+# Extract the percentage value from the DataFrame
+loyal_percentage = loyalty_df['loyal_percentage'].iloc[0]
+
+# Declare result var: 
+result = { "type": "number", "value": loyal_percentage }
+2025-08-20 08:59:44 [INFO] Validating code requirements...
+2025-08-20 08:59:44 [INFO] Code validation successful.
+2025-08-20 08:59:44 [INFO] Cleaning the generated code...
+2025-08-20 08:59:44 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT 
+    (COUNT(CASE WHEN Segment = 'Loyal Customers' THEN 1 END) * 100.0 / COUNT(*)) AS loyal_percentage
+FROM 
+    table_rfm_segmented
+"""
+loyalty_df = execute_sql_query(sql_query)
+loyal_percentage = loyalty_df['loyal_percentage'].iloc[0]
+result = {'type': 'number', 'value': loyal_percentage}
+2025-08-20 08:59:44 [INFO] Response generated successfully.
+2025-08-20 08:59:44 [INFO] Question: plot a bar chart displaying the distribution of customers accross the different segments
+2025-08-20 08:59:44 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:59:44 [INFO] Prompt ID: 4172c751-5fd6-4d8f-977c-b5a994f0aea7
+2025-08-20 08:59:44 [INFO] Generating new code...
+2025-08-20 08:59:44 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ plot a bar chart displaying the distribution of customers accross the different segments
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 08:59:49 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 08:59:49 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Execute SQL query to get the count of customers in each segment
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+
+# Fetch the data using the provided function
+df_segment_distribution = execute_sql_query(sql_query)
+
+# Plotting the bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(df_segment_distribution['Segment'], df_segment_distribution['CustomerCount'], color='skyblue')
+plt.xlabel('Customer Segment')
+plt.ylabel('Number of Customers')
+plt.title('Distribution of Customers Across Different Segments')
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Save the plot to a file
+plt.savefig('customer_segment_distribution.png')
+
+# Declare result variable
+result = { "type": "plot", "value": "customer_segment_distribution.png" }
+2025-08-20 08:59:49 [INFO] Validating code requirements...
+2025-08-20 08:59:49 [INFO] Code validation successful.
+2025-08-20 08:59:49 [INFO] Cleaning the generated code...
+2025-08-20 08:59:49 [INFO] Executing code: import pandas as pd
+import matplotlib.pyplot as plt
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+df_segment_distribution = execute_sql_query(sql_query)
+plt.figure(figsize=(10, 6))
+plt.bar(df_segment_distribution['Segment'], df_segment_distribution['CustomerCount'], color='skyblue')
+plt.xlabel('Customer Segment')
+plt.ylabel('Number of Customers')
+plt.title('Distribution of Customers Across Different Segments')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('exports/charts/temp_chart_80440cf3-27f6-45a3-8c42-70a10833c97f.png')
+result = {'type': 'plot', 'value': 'exports/charts/temp_chart_80440cf3-27f6-45a3-8c42-70a10833c97f.png'}
+2025-08-20 08:59:50 [INFO] Response generated successfully.
+2025-08-20 08:59:50 [INFO] Question: plot a bar chart displaying the distribution of customers accross the different segments, each segment should be a different color, and the bars should be labeled with the customer count
+2025-08-20 08:59:50 [INFO] Running PandasAI with openai LLM...
+2025-08-20 08:59:50 [INFO] Prompt ID: ba192b02-8854-475c-8ae1-4f52acb0d471
+2025-08-20 08:59:50 [INFO] Generating new code...
+2025-08-20 08:59:50 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_rfm_segmented" columns="[{"name": "CustomerID", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Recency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Monetary", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "R_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "F_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "M_score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RFM_Score", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Segment", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="4334x9">
+CustomerID,Recency,Frequency,Monetary,R_score,F_score,M_score,RFM_Score,Segment
+12346,40156,1,77183.6,1,1,5,115,Others
+12347,8076,6,4085.18,3,5,5,355,Loyal Customers
+12348,13415,4,1797.24,2,4,4,244,At Risk
+12349,3978,1,1757.55,4,1,4,414,Recent but Infrequent
+12350,38550,1,334.4,1,1,2,112,Others
+</table>
+
+
+</tables>
+
+You are already provided with the following functions that you can call:
+<function>
+def execute_sql_query(sql_query: str) -> pd.Dataframe
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ plot a bar chart displaying the distribution of customers accross the different segments, each segment should be a different color, and the bars should be labeled with the customer count
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-08-20 09:00:19 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-20 09:00:19 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Execute SQL query to get customer distribution across segments
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+df_segments = execute_sql_query(sql_query)
+
+# Plotting the bar chart
+plt.figure(figsize=(10, 6))
+bars = plt.bar(df_segments['Segment'], df_segments['CustomerCount'], color=plt.cm.tab10.colors)
+
+# Adding labels to each bar
+for bar in bars:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, yval, int(yval), va='bottom')  # va: vertical alignment
+
+plt.title('Distribution of Customers Across Segments')
+plt.xlabel('Customer Segments')
+plt.ylabel('Number of Customers')
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Save the plot
+plt.savefig('customer_segments_distribution.png')
+
+# Declare result var
+result = {"type": "plot", "value": "customer_segments_distribution.png"}
+2025-08-20 09:00:19 [INFO] Validating code requirements...
+2025-08-20 09:00:19 [INFO] Code validation successful.
+2025-08-20 09:00:19 [INFO] Cleaning the generated code...
+2025-08-20 09:00:19 [INFO] Executing code: import pandas as pd
+import matplotlib.pyplot as plt
+sql_query = """
+SELECT Segment, COUNT(CustomerID) AS CustomerCount
+FROM table_rfm_segmented
+GROUP BY Segment
+ORDER BY CustomerCount DESC
+"""
+df_segments = execute_sql_query(sql_query)
+plt.figure(figsize=(10, 6))
+bars = plt.bar(df_segments['Segment'], df_segments['CustomerCount'], color=plt.cm.tab10.colors)
+for bar in bars:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width() / 2, yval, int(yval), va='bottom')
+plt.title('Distribution of Customers Across Segments')
+plt.xlabel('Customer Segments')
+plt.ylabel('Number of Customers')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('exports/charts/temp_chart_4b23ac88-1ec2-495b-ab09-120b4fb40786.png')
+result = {'type': 'plot', 'value': 'exports/charts/temp_chart_4b23ac88-1ec2-495b-ab09-120b4fb40786.png'}
+2025-08-20 09:00:19 [INFO] Response generated successfully.

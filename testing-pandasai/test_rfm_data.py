@@ -43,8 +43,16 @@ def setup_llm():
         print("Add your API key to .env file: OPENAI_API_KEY=your_actual_key")
         return None
     
+    # Get model and temperature from environment variables with defaults
+    model = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')  # Default: gpt-3.5-turbo
+    temperature = float(os.getenv('OPENAI_TEMPERATURE', '0.7'))  # Default: 0.7
+    
     try:
-        llm = OpenAI(api_key)
+        print(f"\n🤖 Configuring OpenAI LLM:")
+        print(f"   Model: {model}")
+        print(f"   Temperature: {temperature}")
+        
+        llm = OpenAI(api_key=api_key, model=model, temperature=temperature)
         pai.config.set({"llm": llm})
         print("✅ LLM configured successfully!")
         return llm
@@ -84,7 +92,9 @@ def test_llm_queries(df, llm):
         "What is the average monetary value for each customer segment?",
         "Which segment has the highest average frequency?",
         "Show me the top 5 customers by monetary value",
-        "What percentage of customers are loyal customers?"
+        "What percentage of customers are loyal customers?",
+        "plot a bar chart displaying the distribution of customers accross the different segments",
+        "plot a bar chart displaying the distribution of customers accross the different segments, each segment should be a different color, and the bars should be labeled with the customer count"
     ]
     
     for i, query in enumerate(queries, 1):

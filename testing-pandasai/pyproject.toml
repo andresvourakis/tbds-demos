@@ -10,6 +10,7 @@ packages = [{include = "test_pandas_ai"}]
 python = ">=3.11,<3.12"
 pandasai = ">=3.0.0b2"
 pandasai-openai = "^0.1.6"
+dotenv = "^0.9.9"
 
 [tool.poetry.group.dev.dependencies]
 
