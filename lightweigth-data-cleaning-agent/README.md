@@ -36,8 +36,12 @@ An LLM-powered agent that automatically generates and executes Python code to cl
 
 ```python
 import pandas as pd
+from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from data_cleaning_agent import LightweightDataCleaningAgent
+
+# Load environment variables (expects OPENAI_API_KEY in .env)
+load_dotenv()
 
 # Initialize agent
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
